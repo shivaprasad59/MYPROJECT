@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import './Navbar.css'
 import Home from './Restaurants/Home';
-import { Link, Route, Routes } from 'react-router-dom';
+import Home1 from './Instamart/Home';
+import Home2 from './Account/Home'
+import Home3 from './Cart/Home'
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-
+    const [talk,setTalk]=useState(true);
     const speak = () => {
+       if(talk){
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance();
 
@@ -17,16 +21,18 @@ const Navbar = () => {
         });
 
         synth.speak(utterance);
-    };
+       }
+       setTimeout(()=>{
 
+       }, 500);
+        setTalk(false);
+    };
+   
     const [test, setTest] = useState("");
 
     const handleListen = () => {
         const recognition = new window.webkitSpeechRecognition();
 
-        recognition.onstart = () => {
-            console.log("Speech recognition listening...");
-        };
 
         recognition.onresult = (event) => {
             const transcript = event.results[0][0].transcript;
@@ -35,9 +41,33 @@ const Navbar = () => {
 
         recognition.start();
     };
-
+    const navigate = useNavigate();
+    const Goto = () => {
+        if (test !== "") {
+            if (test === "Go to restaurants.") {
+                navigate("/Restaurants/Home.js");
+            }
+            else if (test === "Go to account.") {
+                navigate("/Account/Home.js");
+            }
+            else if (test === "Go to cart.") {
+                navigate("/Cart/Home.js");
+            }
+            else if (test === "Go to instamart.") {
+                navigate("/Instamart/Home.js");
+            }
+        }
+    }
+    useEffect(() => {
+        Goto();
+    }, [test])
+    if(talk===false){
+        handleListen();
+    }
+  
     return (
-        <>
+        <button onClick={speak} className='main-button'>
+            <>
             <div>
                 <nav className="navbar navbar-expand-lg bg-body-tertiary mt-2">
                     <div className="container-fluid">
@@ -68,15 +98,16 @@ const Navbar = () => {
                 </nav>
             </div>
             <div>
-                <button onClick={speak}>speak</button>
-                <button onDoubleClick={handleListen}>Listen</button>
-                {test}
             </div>
             <Routes>
-                <Route exact path="/" element={<Navbar/>} />
-                <Route exact path="/Restaurants/Home" element={<Home/>} />
+                <Route exact path='/' />
+                <Route exact path="/Restaurants/Home.js" element={<Home />} />
+                <Route exact path="/Instamart/Home.js" element={<Home1 />} />
+                <Route exact path="/Account/Home.js" element={<Home2 />} />
+                <Route exact path="/Cart/Home.js" element={<Home3 />} />
             </Routes>
         </>
+        </button>
     );
 }
 
