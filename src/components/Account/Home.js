@@ -1,123 +1,57 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useEffect, useState } from 'react'
+import '../Account/Home.css'
+import { useNavigate } from 'react-router-dom';
 const Home = () => {
-  const [details, setDetails] = useState([]);
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState(true);
-  const [listening, setListening] = useState(false);
-  const [click, setClick] = useState(0);
-
-  useEffect(() => {
-    if (username && click === 1) {
-      const synth = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = "Tell your username after clicking mouse";
-      synth.speak(utterance);
-      setUsername(false);
-    }
-  }, [username, click]);
-  const handleClick=(e)=>{
-    e.preventDefault();
-   
+  const [click,setClick]=useState(0);
+  const [loggedin,setLoggedin]=useState(true);
+  const [test,setTest]=useState("");
+  useEffect(()=>{
+   if(loggedin){
+    const synth=window.speechSynthesis;
+    const utterance=new window.SpeechSynthesisUtterance;
+    utterance.text+="Have you signed up in our website";
+    utterance.text+="Say yes for login and no for signup by clicking one time anywhere";
+    synth.speak(utterance);
+    setLoggedin(false);
+   }
+  },[loggedin])
+  const handleClick=()=>{
     setClick(click+1);
-    console.log(click);
   }
-  useEffect(() => {
-    if (click === 3) {
-      const synth = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = "Tell your password after clicking mouse";
-      synth.speak(utterance);
-      setUsername(false);
-    }
-  }, [username, click]);
-
-  useEffect(() => {
-    if (click===2) {
-      console.log("Entered the recognition mode");
+  useEffect(()=>{
+    if(click===1){
+      console.log("Clicked 1 time");
       const recognition = new window.webkitSpeechRecognition();
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.toLowerCase();
-        setId(transcript);
+        setTest(transcript);
         recognition.stop();
-        console.log(id);
+       
       };
       recognition.start();
-      };
-      if (click===4) {
-        console.log("Ready to listen password");
-        const recognition = new window.webkitSpeechRecognition();
-      recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript.toLowerCase();
-        setPassword(transcript);
-        recognition.stop();
-        console.log(password);
-        setClick(click+1);
-      };
-      recognition.start();
-        };
-     
-      setListening(false);
-    
-  }, [listening, click]);
-
-  
-    useEffect(()=>{
-    if(click===5){
-      if (id !== "" && password !== "") {
-        const data = { userid: id, pass: password };
-        let temp = 0;
-  
-        for (let i of details) {
-          if (i.userid === data.userid) {
-            console.log("Wrong details");
-            temp = 1;
-            break;
-          }
-        }
-  
-        if (temp === 0) {
-          setDetails([...details, data]);
-          console.log("Details added:", data);
-        }
-        const synth = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance();
-
-      // Retrieve the headers from the HTML document
-      const headers = document.querySelectorAll("h4","h5");
-      headers.forEach((header) => {
-        utterance.text += header.textContent + " ";
-      });
-       utterance.text+="Added details successfully";
-      synth.speak(utterance);
-        setId("");
-        setPassword("");
-      }
-    };
-    
-    },[click]);
-
+      console.log(test);
+    }
+  },[click])
+  const navigate=useNavigate();
+  useEffect(()=>{
+    console.log(test);
+   if(click===2){
+    console.log("Clicked 2 times");
+    if(test==="yes."){
+      navigate("/Account/Login");
+    }
+    else{
+      navigate("/Account/Signup");
+    }
+   }
+  },[click])
   return (
     <div>
       <button onClick={handleClick}>
-      <form >
-        <label>Username:</label>
-        {/* <button onClick={() => setListening(true)}>Speak Username</button> */}
-        <input type='text' onChange={(e) => setId(e.target.value)} />
-
-        <label>Password:</label>
-        {/* <button onClick={() => setListening(true)}>Speak Password</button> */}
-        <input type='password'  onChange={(e) => setPassword(e.target.value)} />
-
-        <button type='submit'>LOGIN</button>
-      </form>
-      <hr/>
-      {/* <h4>{id}</h4>
-      <h5>{password}</h5> */}
+          This is the home page of the accounts;
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

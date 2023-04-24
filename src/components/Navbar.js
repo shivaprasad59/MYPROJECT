@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Navbar.css'
 import Home from './Restaurants/Home';
-import Home1 from './Instamart/Home';
 import Home2 from './Account/Home'
 import Home3 from './Cart/Home'
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
@@ -44,7 +43,7 @@ const Navbar = () => {
             navigate("/Restaurants/Home");
           } else if (temp === "gotoaccount.") {
             navigate("/Account/Home");
-          } else if (temp === "cart.") {
+          } else if (temp === "gotobag.") {
             navigate("/Cart/Home");
           } else if (temp === "gotoinstamart.") {
             navigate("/Instamart/Home");
