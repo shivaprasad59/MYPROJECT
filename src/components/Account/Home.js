@@ -9,8 +9,8 @@ const Home = () => {
    if(loggedin){
     const synth=window.speechSynthesis;
     const utterance=new window.SpeechSynthesisUtterance;
-    utterance.text+="Have you signed up in our website";
-    utterance.text+="Say yes for login and no for signup by clicking one time anywhere";
+    utterance.text+="Have you signed up in our website.";
+    utterance.text+="Say yes. for login. and no. for signup. by clicking one time anywhere";
     synth.speak(utterance);
     setLoggedin(false);
    }
@@ -37,7 +37,7 @@ const Home = () => {
     console.log(test);
    if(click===2){
     console.log("Clicked 2 times");
-    if(test==="yes."){
+    if(test==="yes." || test==="s."){
       navigate("/Account/Login");
     }
     else{

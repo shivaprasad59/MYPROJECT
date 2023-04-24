@@ -62,8 +62,9 @@ const Navbar = () => {
 
       // Retrieve the headers from the HTML document
       const headers = document.querySelectorAll("li");
+      utterance.text+="Hello welcome to our website.This page has the following components.";
       headers.forEach((header) => {
-        utterance.text += header.textContent + " ";
+        utterance.text += header.textContent + ".";
       });
 
       synth.speak(utterance);

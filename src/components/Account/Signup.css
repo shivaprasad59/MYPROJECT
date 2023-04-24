@@ -1,0 +1,25 @@
+form{
+    width: 300px;
+    height: 350px;
+    border: 2px solid black;
+    box-shadow: 3px 3px 20px gray;
+}
+button{
+ border: none;
+}
+h2{
+    margin-bottom: 15px;
+}
+h5{
+    border: 1px solid black;
+    margin-left: 80px;
+    margin-right: 80px;
+    background-color: blue;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+}
+label{
+    font-weight: 600;
+    font-size: 15px;
+}

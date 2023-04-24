@@ -1,5 +1,6 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-
+import './Signup.css'
 const Signup = () => {
   const [details, setDetails] = useState([]);
   const [id, setId] = useState("");
@@ -9,7 +10,16 @@ const Signup = () => {
   const [address,setAddress]=useState("");
   const [listening, setListening] = useState(false);
   const [click, setClick] = useState(0);
-
+  const [x,setX]=useState(true);
+  useEffect(()=>{
+    if(x){
+      const synth=window.speechSynthesis;
+      const utterance=new SpeechSynthesisUtterance();
+      utterance.text+="Welcome to the signup page."
+      synth.speak(utterance);
+      setX(false);
+    }
+  },[x])
   useEffect(() => {
     if (username && click === 1) {
       const synth = window.speechSynthesis;
@@ -101,9 +111,20 @@ const Signup = () => {
       setListening(false);
     
   }, [listening, click]);
-
-  
+  const [submit,setSubmit]=useState(false);
+  // useEffect(()=>{
+  //  if(submit){
+  //   const synth=window.speechSynthesis;
+  //   const utterance=new SpeechSynthesisUtterance();
+  //   utterance.text+="Click one more time to submit";
+  //   synth.speak(utterance);
+  //   setSubmit(false);
+  //  }
+  // },[submit])
     useEffect(()=>{
+    if(click===8){
+      setSubmit(true);
+    }
     if(click===9){
       if (id !== "" && password !== "") {
         const data = { userid: id, pass: password ,mobno:mobile,add:address};
@@ -116,7 +137,7 @@ const Signup = () => {
             break;
           }
         }
-  
+         
         if (temp === 0) {
           setDetails([...details, data]);
           console.log("Details added:", data);
@@ -131,6 +152,25 @@ const Signup = () => {
       });
        utterance.text+="Added details successfully";
       synth.speak(utterance);
+    //   const fetchData=async()=>{
+    //     try{
+    //  const response=await axios.post("http://localhost:5000/users",{
+    //    userid:"navatha",
+    //    password:"9867",
+    //   mobileno:"76788932798",
+    //    Address:"Hyderabad"
+    //  },{
+    //    headers: {
+    //      'Content-Type': 'application/json'
+    //    }
+    //  });
+    //  console.log(response);
+    //     }
+    //     catch(e){
+    //   console.log(e);
+    //     }
+    //   }
+    //   fetchData();
         setId("");
         setPassword("");
       }
@@ -141,6 +181,7 @@ const Signup = () => {
   return (
     <div>
       <button onClick={handleClick}>
+        <h2>SignUp Page</h2>
       <form >
         <label>Username:</label>
         {/* <button onClick={() => setListening(true)}>Speak Username</button> */}
@@ -149,8 +190,14 @@ const Signup = () => {
         <label>Password:</label>
         {/* <button onClick={() => setListening(true)}>Speak Password</button> */}
         <input type='password'  onChange={(e) => setPassword(e.target.value)} />
-        <input type='phoneno' />
-        <button type='submit'>Signup</button>
+        {/* <input type='phoneno' /> */}
+        <label>Mobile No:</label>
+        {/* <button onClick={() => setListening(true)}>Speak Password</button> */}
+        <input type='Number'  onChange={(e) => setMobile(e.target.value)} />
+        <label>Address:</label>
+        <textarea type="text" onChange={(e)=>setAddress(e.target.value)}/>
+        {/* <button type='submit'>Signup</button> */}
+        <h5>Submit</h5>
       </form>
       <hr/>
       {/* <h4>{id}</h4>

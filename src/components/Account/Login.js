@@ -1,12 +1,25 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-
+import './Login.css'
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [logindetails,setLoginDetails]=useState([]);
+  const [x,setX]=useState(true);
+  const navigate=useNavigate();
+  useEffect(()=>{
+    if(x){
+      const synth=window.speechSynthesis;
+    const utterance=new SpeechSynthesisUtterance();
+    utterance.text+="Welcome to the Login page.Follow instructions to Login";
+    utterance.text+="Click and give input every time";
+    synth.speak(utterance);
+    setX(false);
+    }
+  },[x])
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/users");
+        const response = await axios.get("http://localhost:5000/users");
         setLoginDetails(response.data);
         console.log(response.data);
       } catch (e) {
@@ -85,21 +98,22 @@ const Login = () => {
         let temp = 0;
   
         for (let i of logindetails) {
-          console.log(logindetails);
-          if (i.userid === data.userid) {
-            console.log("Wrong details");
+          console.log("login="+logindetails);
+          if ((i.userid === data.userid) && (i.pass===data.password)) {
+            console.log("correct details");
             const synth=window.speechSynthesis;
             const utterance=new SpeechSynthesisUtterance();
-            utterance.text+="wrong details please enter correct details";
+            utterance.text+="Congratulations.You have entered correct details.Please wait,We are logging you in.";
             synth.speak(utterance);
             temp = 1;
+            setDetails([...details, data]);
             break;
           }
         }
-        
+       
         if (temp === 0) {
-          setDetails([...details, data]);
-          console.log("Details added:", data);
+          
+          console.log("wrong Details :", data);
           const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance();
 
@@ -108,8 +122,9 @@ const Login = () => {
       headers.forEach((header) => {
         utterance.text += header.textContent + " ";
       });
-       utterance.text+="Added details successfully";
+       utterance.text+="Details are not matched.If not signed up.Yet. First signup please";
       synth.speak(utterance);
+      navigate("/Account/Signup");
         }
         
         setId("");
@@ -122,16 +137,17 @@ const Login = () => {
   return (
     <div>
       <button onClick={handleClick}>
+        <h2>Login Page</h2>
       <form >
-        <label>Username:</label>
+        <label>Username:  </label>
         {/* <button onClick={() => setListening(true)}>Speak Username</button> */}
         <input type='text' onChange={(e) => setId(e.target.value)} />
 
-        <label>Password:</label>
+        <label>Password :  </label>
         {/* <button onClick={() => setListening(true)}>Speak Password</button> */}
         <input type='password'  onChange={(e) => setPassword(e.target.value)} />
 
-        <button type='submit'>LOGIN</button>
+        <h6>Submit</h6>
       </form>
       <hr/>
       {/* <h4>{id}</h4>
