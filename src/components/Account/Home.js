@@ -9,83 +9,113 @@ const Home = () => {
   const [click, setClick] = useState(0);
 
   useEffect(() => {
-    if (username && click === 0) {
-      const synth = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = "Tell your username";
-      synth.speak(utterance);
-      setUsername(false);
-    }
-  }, [username, click]);
-
-  useEffect(() => {
     if (username && click === 1) {
       const synth = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance();
-      utterance.text = "Tell your password";
+      utterance.text = "Tell your username after clicking mouse";
+      synth.speak(utterance);
+      setUsername(false);
+    }
+  }, [username, click]);
+  const handleClick=(e)=>{
+    e.preventDefault();
+   
+    setClick(click+1);
+    console.log(click);
+  }
+  useEffect(() => {
+    if (click === 3) {
+      const synth = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance();
+      utterance.text = "Tell your password after clicking mouse";
       synth.speak(utterance);
       setUsername(false);
     }
   }, [username, click]);
 
   useEffect(() => {
-    if (listening) {
+    if (click===2) {
+      console.log("Entered the recognition mode");
       const recognition = new window.webkitSpeechRecognition();
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.toLowerCase();
-        if (click === 0) {
-          setId(transcript);
-          setClick(1);
-          setListening(false);
-        } else {
-          setPassword(transcript);
-          setClick(0);
-          setListening(false);
-        }
+        setId(transcript);
+        recognition.stop();
+        console.log(id);
       };
       recognition.start();
+      };
+      if (click===4) {
+        console.log("Ready to listen password");
+        const recognition = new window.webkitSpeechRecognition();
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        setPassword(transcript);
+        recognition.stop();
+        console.log(password);
+        setClick(click+1);
+      };
+      recognition.start();
+        };
+     
       setListening(false);
-    }
+    
   }, [listening, click]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (id !== "" && password !== "") {
-      const data = { userid: id, pass: password };
-      let temp = 0;
-
-      for (let i of details) {
-        if (i.userid === data.userid) {
-          console.log("Wrong details");
-          temp = 1;
-          break;
+  
+    useEffect(()=>{
+    if(click===5){
+      if (id !== "" && password !== "") {
+        const data = { userid: id, pass: password };
+        let temp = 0;
+  
+        for (let i of details) {
+          if (i.userid === data.userid) {
+            console.log("Wrong details");
+            temp = 1;
+            break;
+          }
         }
-      }
+  
+        if (temp === 0) {
+          setDetails([...details, data]);
+          console.log("Details added:", data);
+        }
+        const synth = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance();
 
-      if (temp === 0) {
-        setDetails([...details, data]);
-        console.log("Details added:", data);
+      // Retrieve the headers from the HTML document
+      const headers = document.querySelectorAll("h4","h5");
+      headers.forEach((header) => {
+        utterance.text += header.textContent + " ";
+      });
+       utterance.text+="Added details successfully";
+      synth.speak(utterance);
+        setId("");
+        setPassword("");
       }
-
-      setId("");
-      setPassword("");
-    }
-  };
+    };
+    
+    },[click]);
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <button onClick={handleClick}>
+      <form >
         <label>Username:</label>
-        <button onClick={() => setListening(true)}>Speak Username</button>
-        <input type='text' value={id} onChange={(e) => setId(e.target.value)} />
+        {/* <button onClick={() => setListening(true)}>Speak Username</button> */}
+        <input type='text' onChange={(e) => setId(e.target.value)} />
 
         <label>Password:</label>
-        <button onClick={() => setListening(true)}>Speak Password</button>
-        <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+        {/* <button onClick={() => setListening(true)}>Speak Password</button> */}
+        <input type='password'  onChange={(e) => setPassword(e.target.value)} />
 
         <button type='submit'>LOGIN</button>
       </form>
+      <hr/>
+      {/* <h4>{id}</h4>
+      <h5>{password}</h5> */}
+      </button>
     </div>
   );
 };
