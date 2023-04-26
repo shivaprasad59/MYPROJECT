@@ -147,7 +147,7 @@ const Login = () => {
         {/* <button onClick={() => setListening(true)}>Speak Password</button> */}
         <input type='password'  onChange={(e) => setPassword(e.target.value)} />
 
-        <h6>Submit</h6>
+        <h6 className='.h6'>Submit</h6>
       </form>
       <hr/>
       {/* <h4>{id}</h4>

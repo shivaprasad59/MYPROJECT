@@ -113,7 +113,7 @@ const Home = () => {
         const utterance = new SpeechSynthesisUtterance();
   
         // Retrieve the headers from the HTML document
-        const headers = document.querySelectorAll("h5", "h6");
+        const headers = document.querySelectorAll("h4", "h6");
         utterance.text += "The restaurants nearer to you are.";
         headers.forEach((header) => {
           utterance.text += header.textContent + ". ";
@@ -141,7 +141,7 @@ const Home = () => {
                 <div className="card"  >
                   <img src={item.image} className="card-img-top" alt="..." />
                   <div className="card-body">
-                    <h5 className="card-title">{item.name}</h5>
+                    <h4 className="card-title">{item.name}</h4>
                     <h6 className="card-text">{item.description}</h6>
                     <p className="rating">{item.rating}</p>
                   </div>

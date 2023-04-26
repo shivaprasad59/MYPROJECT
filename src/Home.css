@@ -1,0 +1,11 @@
+.img{
+    height: 500px;
+    width: 1150px;
+}
+.carousel-item{
+    margin-left: 70px;
+    margin-right: 40px;
+}
+.carousel-caption{
+    margin-right: 110px;
+}

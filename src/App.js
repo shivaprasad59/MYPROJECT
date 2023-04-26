@@ -10,12 +10,16 @@ import HyderabadSpice from "./components/Restaurants/Restaurantsdata/HyderabadSp
 import Paradise from "./components/Restaurants/Restaurantsdata/Paradise";
 import ChefsAvenue from "./components/Restaurants/Restaurantsdata/ChefsAvenue";
 import PistaHouse from "./components/Restaurants/Restaurantsdata/PistaHouse";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Home1 from './components/Home'
+
 function App() {
   return(
     <>
-     <div>
+     <div className="main-body">
+      <Navbar/>
       <Routes>
-        <Route path="/" element={<Navbar/>} />
+        <Route path="/" element={<Home1/>} />
         <Route path="/Restaurants/Home" element={<Home/>}/>
         <Route path="/Account/Home" element={<Account/>}/>
         <Route path="/Cart/Home" element={<Cart/>}/>

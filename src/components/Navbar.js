@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import './Navbar.css'
-import Home from './Restaurants/Home';
-import Home2 from './Account/Home'
-import Home3 from './Cart/Home'
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
-
+import logo from '../Assets/Images/logo.jpg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faUtensils } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 const Navbar = () => {
   const [read, setRead] = useState(true);
   const [test, setTest] = useState("");
@@ -83,23 +86,23 @@ const Navbar = () => {
         <div>
           <nav className="navbar navbar-expand-lg bg-body-tertiary mt-2">
             <div className="container-fluid">
-              <Link className="navbar-brand" to="#">Swiggy</Link>
+              <Link className="navbar-brand" to="#"><img src={logo} className="logo"/><h4 className="logo-name">FOOD DELIVERY</h4></Link>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="#">Home</Link>
+                    <Link className="nav-link active" aria-current="page" to="#"><h5><FontAwesomeIcon icon={faHome} />Home</h5></Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link active" to="/Restaurants/Home">Restaurants</Link>
+                    <Link className="nav-link active" to="/Restaurants/Home"><h5><FontAwesomeIcon icon={faSearch} />Search</h5></Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link active" to="/Instamart/Home">Instamart</Link>
+                    <Link className="nav-link active" to="/Instamart/Home"><h5><FontAwesomeIcon icon={faUtensils} />Restaurants</h5></Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link active" to="/Account/Home">Account</Link>
+                    <Link className="nav-link active" to="/Account/Home"><h5><FontAwesomeIcon icon={faUser} />Account</h5></Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link active" to="/Cart/Home">Cart</Link>
+                    <Link className="nav-link active" to="/Cart/Home"><h5><FontAwesomeIcon icon={faShoppingCart} />Cart</h5></Link>
                   </li>
                 </ul>
               </div>

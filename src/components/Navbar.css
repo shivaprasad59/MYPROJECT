@@ -7,3 +7,18 @@
     border: none;
     background-color: white;
 }
+.navbar-brand{
+    display: flex;
+}
+.logo{
+    height: 60px;
+    width: 80px;
+}
+.logo-name{
+    margin-top: 18px;
+}
+.navbar{
+    box-shadow: 4px 3px 15px grey;
+    margin-bottom: 10px;
+    border-radius: 30px ;
+}

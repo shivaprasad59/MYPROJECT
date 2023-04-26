@@ -152,32 +152,32 @@ const Signup = () => {
       });
        utterance.text+="Added details successfully";
       synth.speak(utterance);
-    //   const fetchData=async()=>{
-    //     try{
-    //  const response=await axios.post("http://localhost:5000/users",{
-    //    userid:"navatha",
-    //    password:"9867",
-    //   mobileno:"76788932798",
-    //    Address:"Hyderabad"
-    //  },{
-    //    headers: {
-    //      'Content-Type': 'application/json'
-    //    }
-    //  });
-    //  console.log(response);
-    //     }
-    //     catch(e){
-    //   console.log(e);
-    //     }
-    //   }
-    //   fetchData();
+      
+      
         setId("");
         setPassword("");
       }
     };
     
     },[click]);
-
+   useEffect(()=>{
+     if(click===9){
+      const createPost=async() =>{
+        const post = { 
+          Id: id,
+           Password:password,
+          Mobile:mobile,
+          Address:address }
+    try {
+      const res = await axios.post('http://localhost:5000/users', post)
+      console.log(res.data)
+    } catch (e) {
+      alert(e)
+    }
+      }
+      createPost();
+     }
+   },[click])
   return (
     <div>
       <button onClick={handleClick}>
@@ -197,7 +197,7 @@ const Signup = () => {
         <label>Address:</label>
         <textarea type="text" onChange={(e)=>setAddress(e.target.value)}/>
         {/* <button type='submit'>Signup</button> */}
-        <h5>Submit</h5>
+        <h5 className='submit'>Submit</h5>
       </form>
       <hr/>
       {/* <h4>{id}</h4>

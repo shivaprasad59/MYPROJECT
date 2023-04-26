@@ -10,7 +10,7 @@ button{
 h2{
     margin-bottom: 15px;
 }
-h5{
+.submit{
     border: 1px solid black;
     margin-left: 80px;
     margin-right: 80px;
