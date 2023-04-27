@@ -1,12 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const HyderabadSpice = () => {
   const [data,setData]=useState([]);
   const [cart,setCart]=useState([]);
-  const [x,setX]=useState("");
+  const [test,setTest]=useState("");
   const [listen,setListen]=useState(false);
   const [read,setRead]=useState(false);
+  const [id,setId]=useState(0);
+  const [submit,setSubmit]=useState(false);
+  const [go,setGo]=useState(false);
   useEffect(()=>{
    
     if (data.length!==0) {
@@ -25,34 +29,89 @@ const HyderabadSpice = () => {
     }
   }
 ,[data])
-useEffect(()=>{
-  if(listen){
-    
+useEffect(() => {
+  if (listen) {
     const recognition = new window.webkitSpeechRecognition();
-      recognition.onresult = (event) => {
-        console.log("Listening...");
-        const transcript = event.results[0][0].transcript.toLowerCase();
-        
-        setX(transcript);
-        recognition.stop();
-        console.log(transcript);
-        // if(transcript==="add chicken biryani single."){
-        //   const y={
-        //     title:"Chicken biryani single",
-        //     Price:150
-        //   }
-        //   setCart([...cart,y]);
-        // }
-        console.log(cart);
-      };
-      recognition.start();
-      if(x!==""){
-        console.log(x);
-        setListen(false);
-      }
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript.toLowerCase();
+      setTest(transcript);
+      recognition.stop();
+      console.log(transcript);
+    };
+    recognition.start();
+    setListen(false);
   }
-  console.log(cart);
-},[listen])
+}, [listen]);
+
+useEffect(()=>{
+  if(test!==""){
+     console.log("test="+test);
+     const synth=window.speechSynthesis;
+     const utterance=new SpeechSynthesisUtterance();
+     const x="";
+     if(test==="add chicken biryani single."){
+      utterance.text+="Added chicken biryani single."
+       setId(1);
+     }
+     if(test==="add mutton biryani single."){
+      utterance.text+="Added mutton biryani single."
+       setId(2);
+     }
+     if(test==="add chicken biryani full."){
+      utterance.text+="Added chicken biryani full."
+       setId(3);
+     }
+     if(test==="add mutton biryani full."){
+      utterance.text+="Added mutton biryani full."
+       setId(4);
+     }
+     if(test==="submit."){
+      setSubmit(true);
+     }
+     if(test==="go to cart."){
+      utterance.text+="Going to the cart page.";
+      navigate("/Cart/Home")
+      setGo(true);
+      
+     }
+     synth.speak(utterance);
+     setTest("");
+  }
+},[test]);
+useEffect(()=>{
+   if(cart.length!==0){
+    console.log(cart);
+   }
+},[cart])
+
+useEffect(()=>{
+  if(id!==0){
+    setCart([...cart,id]);
+
+  }
+},[id])
+const navigate=useNavigate();
+useEffect(()=>{
+
+},[go])
+useEffect(()=>{
+  if(submit){
+    for(let i=0;i<cart.length;i++){
+      const handleSubmit=async()=>{
+        try{
+          const response=await axios.post("http://localhost:5000/cart",{
+            id:cart[i],
+          })
+          console.log(response);
+        }
+        catch(e){
+          console.log(e);
+        }
+      }
+      handleSubmit();
+    }
+  }
+},[submit])
 const handleClick=()=>{
   setListen(true);
 }

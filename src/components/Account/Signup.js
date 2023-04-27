@@ -163,13 +163,14 @@ const Signup = () => {
    useEffect(()=>{
      if(click===9){
       const createPost=async() =>{
-        const post = { 
-          Id: id,
-           Password:password,
-          Mobile:mobile,
-          Address:address }
     try {
-      const res = await axios.post('http://localhost:5000/users', post)
+      const res = await axios.post('http://localhost:5000/users', {
+        Id:3,
+        username:id,
+        Password:password,
+        Mobile:mobile,
+        Address:address
+      })
       console.log(res.data)
     } catch (e) {
       alert(e)

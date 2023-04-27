@@ -99,7 +99,7 @@ const Login = () => {
   
         for (let i of logindetails) {
           console.log("login="+logindetails);
-          if ((i.userid === data.userid) && (i.pass===data.password)) {
+          if ((i.username === data.userid) && (i.pass===data.password)) {
             console.log("correct details");
             const synth=window.speechSynthesis;
             const utterance=new SpeechSynthesisUtterance();
