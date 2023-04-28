@@ -164,16 +164,19 @@ const Signup = () => {
      if(click===9){
       const createPost=async() =>{
     try {
-      const res = await axios.post('http://localhost:5000/users', {
-        Id:3,
-        username:id,
-        Password:password,
-        Mobile:mobile,
-        Address:address
-      })
-      console.log(res.data)
+      const payload={
+        id: 3,
+        username:username,
+        address:address,
+        mobile:mobile,
+        password:password
+      }
+      console.log(payload);
+      const res = await axios.post(" http://localhost:5000/Users", payload);
+      console.log(res);
+     
     } catch (e) {
-      alert(e)
+      console.log(e);
     }
       }
       createPost();

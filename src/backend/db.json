@@ -1,20 +1,4 @@
 {
-  "users": [
-    {
-      "Id": 1,
-      "username":"shiva.",
-      "Password": "9867.",
-      "Mobile": "8977648610",
-      "Address": "Pragathi nagar,Hyderabad"
-    },
-    {
-      "Id": 2,
-      "username":"pavan.",
-      "Password": "12345.",
-      "Mobile": "7674807386",
-      "Address": "Nizampet,Hyderabad"
-    }
-  ],
   "Hyderabaspicedata": [
     {
       "Id": 1,
@@ -48,6 +32,24 @@
   "cart": [
     {
       "id": 0
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    }
+  ],
+  "Users": [
+    {
+      "id": 1,
+      "username": "shiva prasad",
+      "address": "pragathi nagar,Hyderabad",
+      "mobile": "8977648610",
+      "password": "1234"
     }
   ]
 }
