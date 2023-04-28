@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './Signup.css'
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
   const [details, setDetails] = useState([]);
   const [id, setId] = useState("");
@@ -11,6 +12,24 @@ const Signup = () => {
   const [listening, setListening] = useState(false);
   const [click, setClick] = useState(0);
   const [x,setX]=useState(true);
+  const [listen,setListen]=useState(false);
+  const [test,setTest]=useState("");
+  const navigate=useNavigate();
+  useEffect(()=>{
+    if(listen){
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        setTest(transcript);
+        recognition.stop();
+        console.log(id);
+      };
+      recognition.start();
+    };
+    if(test!==""){
+        navigate("/Account/Login");
+    }
+  },[listen,test])
   useEffect(()=>{
     if(x){
       const synth=window.speechSynthesis;
@@ -153,7 +172,6 @@ const Signup = () => {
        utterance.text+="Added details successfully";
       synth.speak(utterance);
       
-      
         setId("");
         setPassword("");
       }
@@ -166,7 +184,7 @@ const Signup = () => {
     try {
       const payload={
         id: 3,
-        username:username,
+        username:id,
         address:address,
         mobile:mobile,
         password:password
@@ -182,6 +200,11 @@ const Signup = () => {
       createPost();
      }
    },[click])
+   useEffect(()=>{
+    if(click===10){
+      setListen(true);
+    }
+   },[click]);
   return (
     <div>
       <button onClick={handleClick}>

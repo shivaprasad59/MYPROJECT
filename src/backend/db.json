@@ -37,13 +37,26 @@
       "id": 1
     },
     {
-      "id": 3
-    },
-    {
-      "id": 2
+      "id": 4
     }
   ],
   "Users": [
+    {
+      "id": 1,
+      "username": "shiva prasad",
+      "address": "pragathi nagar,Hyderabad",
+      "mobile": "8977648610",
+      "password": "1234"
+    },
+    {
+      "id": 3,
+      "username": "prasad.",
+      "address": "hyderabad.",
+      "mobile": "what does?",
+      "password": "986712"
+    }
+  ],
+  "login_user": [
     {
       "id": 1,
       "username": "shiva prasad",

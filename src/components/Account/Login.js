@@ -103,7 +103,7 @@ const Login = () => {
             console.log("correct details");
             const synth=window.speechSynthesis;
             const utterance=new SpeechSynthesisUtterance();
-            utterance.text+="Congratulations.You have entered correct details.Please wait,We are logging you in.";
+            utterance.text+="Account found.Please wait,while We are signing you in.";
             synth.speak(utterance);
             temp = 1;
             setDetails([...details, data]);
