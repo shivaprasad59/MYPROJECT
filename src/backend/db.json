@@ -34,10 +34,10 @@
       "id": 0
     },
     {
-      "id": 1
+      "id": 8
     },
     {
-      "id": 4
+      "id": 6
     }
   ],
   "Users": [
@@ -63,6 +63,36 @@
       "address": "pragathi nagar,Hyderabad",
       "mobile": "8977648610",
       "password": "1234"
+    }
+  ],
+  "Dominos": [
+    {
+      "Id": 5,
+      "Item_name": "4 Cheese Pizza",
+      "Price": 639,
+      "Quantity": "1",
+      "Image": "https://images.dominos.co.in/PIZ0171.jpg"
+    },
+    {
+      "Id": 6,
+      "Item_name": "Non Veg Supreme",
+      "Price": 599,
+      "Quantity": "Medium",
+      "Image": "https://images.dominos.co.in/new_non_veg_supreme.jpg"
+    },
+    {
+      "Id": 7,
+      "Item_name": "Pepper Barbecue Chicken",
+      "Price": 449,
+      "Quantity": "1 Medium",
+      "Image": "https://images.dominos.co.in/new_pepper_barbeque_chicken.jpg"
+    },
+    {
+      "Id": 8,
+      "Item_name": "Cheesy Meatballs",
+      "Price": 299,
+      "Quantity": "",
+      "Image": "https://images.dominos.co.in/CheesyMeatballs.jpg"
     }
   ]
 }

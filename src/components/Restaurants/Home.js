@@ -84,7 +84,7 @@ const Home = () => {
         // Retrieve the headers from the HTML document
         utterance.text += "Going to the Dominos menu";
         synth.speak(utterance);
-        navigate("/Restaurants/Dominos");
+        navigate("/Restaurants/PistaHouse");
 
 
       }

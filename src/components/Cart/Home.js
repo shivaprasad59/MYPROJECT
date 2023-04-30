@@ -51,7 +51,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/Hyderabaspicedata");
+        const response = await axios.get("http://localhost:5000/Dominos");
         setData(response.data);
       } catch (e) {
         console.log(e);
