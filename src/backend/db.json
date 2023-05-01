@@ -32,12 +32,6 @@
   "cart": [
     {
       "id": 0
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
     }
   ],
   "Users": [
@@ -47,13 +41,6 @@
       "address": "pragathi nagar,Hyderabad",
       "mobile": "8977648610",
       "password": "1234"
-    },
-    {
-      "id": 3,
-      "username": "prasad.",
-      "address": "hyderabad.",
-      "mobile": "what does?",
-      "password": "986712"
     }
   ],
   "login_user": [
