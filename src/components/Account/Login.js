@@ -6,6 +6,7 @@ const Login = () => {
   const [logindetails,setLoginDetails]=useState([]);
   const [x,setX]=useState(true);
   const navigate=useNavigate();
+  const [goto,setGoto]=useState(false);
   useEffect(()=>{
     if(x){
       const synth=window.speechSynthesis;
@@ -19,7 +20,7 @@ const Login = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/users");
+        const response = await axios.get("http://localhost:5000/Users");
         setLoginDetails(response.data);
         console.log(response.data);
       } catch (e) {
@@ -89,8 +90,33 @@ const Login = () => {
       setListening(false);
     
   }, [listening, click]);
-
-  
+  const [uyd,setUyd]=useState(false);
+  useEffect(()=>{
+    if(uyd){
+      const postData=async()=>{
+        try{
+          const response=await axios.post("http://localhost:5000/login_user",{
+            id:3,
+            username:username,
+            password:password,
+            address:"Nizampet,Hyderabad",
+            mobile:"8790313759"
+          });
+       console.log(response);
+        }
+        catch(e){
+        console.log(e);
+        }
+      }
+      
+    }
+  },[uyd])
+  //  useEffect(()=>{
+  //   if(goto){
+  //     useNavigate('/Account/Home');
+  //     setGoto(false);
+  //   }
+  //  },[goto])
     useEffect(()=>{
     if((click%6)===5){
       if (id !== "" && password !== "") {
@@ -107,10 +133,13 @@ const Login = () => {
             synth.speak(utterance);
             temp = 1;
             setDetails([...details, data]);
+             setGoto(true);
             break;
           }
         }
-       
+        if(temp===1){
+         navigate('/')
+        }
         if (temp === 0) {
           
           console.log("wrong Details :", data);

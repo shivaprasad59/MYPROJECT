@@ -36,8 +36,8 @@ const Home = () => {
    if(loggedin){
     const synth=window.speechSynthesis;
     const utterance=new window.SpeechSynthesisUtterance;
-    utterance.text+="Have you signed up in our website.";
-    utterance.text+="Say yes. for login. and no. for signup. by clicking one time anywhere";
+    utterance.text+="Have you signed up in our website,";
+    utterance.text+="Say yes, for login. ,and no, for signup. by clicking one time anywhere";
     synth.speak(utterance);
     setLoggedin(false);
    }
@@ -75,25 +75,7 @@ const Home = () => {
   return (
     <div>
       <button onClick={handleClick}>
-          {
-            logindetails.map((item)=>{
-              return(
-                <div>
-                  <ul>
-                    <li>
-                      {item.username}
-                    </li>
-                    <li>
-                      {item.mobile}
-                    </li>
-                    <li>
-                      {item.address}
-                    </li>
-                  </ul>
-                </div>
-              )
-            })
-          }
+          Hello
       </button>
     </div>
   )

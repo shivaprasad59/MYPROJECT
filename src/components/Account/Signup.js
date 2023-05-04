@@ -171,7 +171,7 @@ const Signup = () => {
       });
        utterance.text+="Added details successfully";
       synth.speak(utterance);
-      
+       navigate("/Account/Login");
         setId("");
         setPassword("");
       }

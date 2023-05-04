@@ -86,7 +86,14 @@ useEffect(()=>{
 
 useEffect(()=>{
   if(id!==0){
-    setCart([...cart,id]);
+    let x="";
+    for(let i of data){
+      if(i.Id===id){
+        x=i;
+        break;
+      }
+    }
+    setCart([...cart,x]);
 
   }
 },[id])
@@ -100,7 +107,11 @@ useEffect(()=>{
       const handleSubmit=async()=>{
         try{
           const response=await axios.post("http://localhost:5000/cart",{
-            id:cart[i],
+            Id:cart[i].Id,
+            Item_name:cart[i].Item_name,
+            Price:cart[i].Price,
+            Quantity:cart[i].Quantity,
+            Image:cart[i].Image
           })
           console.log(response);
         }
@@ -118,7 +129,7 @@ const handleClick=()=>{
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/Hyderabaspicedata");
+        const response = await axios.get("http://localhost:5000/Hyderabadspicedata");
         setData(response.data);
         console.log(response.data);
       } catch (e) {

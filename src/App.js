@@ -12,6 +12,7 @@ import ChefsAvenue from "./components/Restaurants/Restaurantsdata/ChefsAvenue";
 import PistaHouse from "./components/Restaurants/Restaurantsdata/PistaHouse";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Home1 from './components/Home'
+import End from "./components/Cart/End";
 
 function App() {
   return(
@@ -29,6 +30,7 @@ function App() {
         <Route path="/Restaurants/Paradise" element={<Paradise/>}/>
         <Route path="/Restaurants/PistaHouse" element={<PistaHouse/>}/>
         <Route path="/Restaurants/Dominos" element={<ChefsAvenue/>}/>
+        <Route path="/Cart/End" element={<End/>}/>
       </Routes>
      </div>
     </>
