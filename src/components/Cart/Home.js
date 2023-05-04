@@ -68,19 +68,8 @@ useEffect(()=>{
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
-  //       const response = await axios.get("http://localhost:5000/Dominos");
+  //       const response = await axios.get("http://localhost:5000/Hyderabaspicedata");
   //       setData(response.data);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:5000/Hyderabadspicedata");
-  //       setData([...data,response.data]);
   //     } catch (e) {
   //       console.log(e);
   //     }

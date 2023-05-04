@@ -92,14 +92,7 @@ useEffect(()=>{
 
 useEffect(()=>{
   if(id!==0){
-    let x="";
-    for(let i of data){
-      if(i.Id===id){
-        x=i;
-        break;
-      }
-    }
-    setCart([...cart,x]);
+    setCart([...cart,id]);
 
   }
 },[id])
@@ -169,3 +162,14 @@ const handleClick=()=>{
 }
 
 export default PistaHouse
+
+
+// import React from 'react'
+
+// const PistaHouse = () => {
+//   return (
+//     <div>PistaHouse</div>
+//   )
+// }
+
+// export default PistaHouse
