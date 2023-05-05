@@ -45,7 +45,7 @@ useEffect(()=>{
       utterance.text+=("Please pay the amount,"+totalprice+",to our delivery partner,");
       utterance.text+=",Have a nice day.";
       synt.speak(utterance);
-      setGoto(true);
+      // setGoto(true);
     }
   },[test])
   useEffect(()=>{
@@ -53,10 +53,10 @@ useEffect(()=>{
       try{
         const response=await axios.get(" http://localhost:5000/login_user");
         setUserDetails(response.data);
-        console.log(response.data[1].address);
-        setAddress(response.data[1].address);
-        setMobile(response.data[1].mobile);
-        setUsername(response.data[1].username);
+        console.log(response.data[0].address);
+        setAddress(response.data[0].address);
+        setMobile(response.data[0].mobile);
+        setUsername(response.data[0].username);
 
       }
       catch(e){

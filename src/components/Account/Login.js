@@ -90,17 +90,19 @@ const Login = () => {
       setListening(false);
     
   }, [listening, click]);
+  const [currentUser,setCurrentUser]=useState([]);
   const [uyd,setUyd]=useState(false);
   useEffect(()=>{
     if(uyd){
       const postData=async()=>{
         try{
+          console.log(currentUser);
           const response=await axios.post("http://localhost:5000/login_user",{
-            id:3,
-            username:username,
-            password:password,
-            address:"Nizampet,Hyderabad",
-            mobile:"8790313759"
+            id:currentUser.id,
+            username:currentUser.username,
+            password:currentUser.password,
+            address:currentUser.address,
+            mobile:currentUser.mobile
           });
        console.log(response);
         }
@@ -108,7 +110,7 @@ const Login = () => {
         console.log(e);
         }
       }
-      
+      postData();
     }
   },[uyd])
   //  useEffect(()=>{
@@ -122,17 +124,20 @@ const Login = () => {
       if (id !== "" && password !== "") {
         const data = { userid: id, pass: password };
         let temp = 0;
-  
+       console.log(logindetails);
         for (let i of logindetails) {
-          console.log("login="+logindetails);
+          // console.log("login="+logindetails);
           if ((i.username === data.userid) && (i.pass===data.password)) {
+
             console.log("correct details");
             const synth=window.speechSynthesis;
             const utterance=new SpeechSynthesisUtterance();
             utterance.text+="Account found.Please wait,while We are signing you in.";
+            setCurrentUser(data);
+            setUyd(true);
             synth.speak(utterance);
             temp = 1;
-            setDetails([...details, data]);
+            // setDetails([...details, data]);
              setGoto(true);
             break;
           }

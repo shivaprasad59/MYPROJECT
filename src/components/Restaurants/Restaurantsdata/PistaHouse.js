@@ -92,7 +92,14 @@ useEffect(()=>{
 
 useEffect(()=>{
   if(id!==0){
-    setCart([...cart,id]);
+    let x="";
+    for(let i of data){
+      if(i.Id===id){
+        x=i;
+        break;
+      }
+    }
+    setCart([...cart,x]);
 
   }
 },[id])
