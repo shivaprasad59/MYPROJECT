@@ -6,6 +6,7 @@ const Login = () => {
   const [logindetails,setLoginDetails]=useState([]);
   const [x,setX]=useState(true);
   const navigate=useNavigate();
+  const [goto,setGoto]=useState(false);
   useEffect(()=>{
     if(x){
       const synth=window.speechSynthesis;
@@ -19,7 +20,7 @@ const Login = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/users");
+        const response = await axios.get("http://localhost:5000/Users");
         setLoginDetails(response.data);
         console.log(response.data);
       } catch (e) {
@@ -89,28 +90,61 @@ const Login = () => {
       setListening(false);
     
   }, [listening, click]);
-
-  
+  const [currentUser,setCurrentUser]=useState([]);
+  const [uyd,setUyd]=useState(false);
+  useEffect(()=>{
+    if(uyd){
+      const postData=async()=>{
+        try{
+          console.log(currentUser);
+          const response=await axios.post("http://localhost:5000/login_user",{
+            id:currentUser.id,
+            username:currentUser.username,
+            password:currentUser.password,
+            address:currentUser.address,
+            mobile:currentUser.mobile
+          });
+       console.log(response);
+        }
+        catch(e){
+        console.log(e);
+        }
+      }
+      postData();
+    }
+  },[uyd])
+  //  useEffect(()=>{
+  //   if(goto){
+  //     useNavigate('/Account/Home');
+  //     setGoto(false);
+  //   }
+  //  },[goto])
     useEffect(()=>{
     if((click%6)===5){
       if (id !== "" && password !== "") {
         const data = { userid: id, pass: password };
         let temp = 0;
-  
+       console.log(logindetails);
         for (let i of logindetails) {
-          console.log("login="+logindetails);
+          // console.log("login="+logindetails);
           if ((i.username === data.userid) && (i.pass===data.password)) {
+
             console.log("correct details");
             const synth=window.speechSynthesis;
             const utterance=new SpeechSynthesisUtterance();
             utterance.text+="Account found.Please wait,while We are signing you in.";
+            setCurrentUser(data);
+            setUyd(true);
             synth.speak(utterance);
             temp = 1;
-            setDetails([...details, data]);
+            // setDetails([...details, data]);
+             setGoto(true);
             break;
           }
         }
-       
+        if(temp===1){
+         navigate('/')
+        }
         if (temp === 0) {
           
           console.log("wrong Details :", data);

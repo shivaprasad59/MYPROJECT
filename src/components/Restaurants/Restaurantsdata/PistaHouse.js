@@ -49,7 +49,7 @@ useEffect(()=>{
      const synth=window.speechSynthesis;
      const utterance=new SpeechSynthesisUtterance();
      const x="";
-     if(test==="add four cheese pizza."){
+     if(test==="add 4 cheese pizza."){
       utterance.text+="Added four cheese pizza."
        setId(5);
      }
@@ -75,6 +75,11 @@ useEffect(()=>{
       setGo(true);
       
      }
+     if(test==="go back."){
+      utterance.text+="Going to the previous page";
+      navigate("/Restaurants/Home");
+      setGo(true);
+     }
      synth.speak(utterance);
      setTest("");
   }
@@ -87,7 +92,14 @@ useEffect(()=>{
 
 useEffect(()=>{
   if(id!==0){
-    setCart([...cart,id]);
+    let x="";
+    for(let i of data){
+      if(i.Id===id){
+        x=i;
+        break;
+      }
+    }
+    setCart([...cart,x]);
 
   }
 },[id])
@@ -101,7 +113,11 @@ useEffect(()=>{
       const handleSubmit=async()=>{
         try{
           const response=await axios.post("http://localhost:5000/cart",{
-            id:cart[i],
+            Id:cart[i].Id,
+            Item_name:cart[i].Item_name,
+            Price:cart[i].Price,
+            Quantity:cart[i].Quantity,
+            Image:cart[i].Image
           })
           console.log(response);
         }

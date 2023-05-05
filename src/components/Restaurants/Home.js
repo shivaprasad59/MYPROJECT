@@ -95,7 +95,7 @@ const Home = () => {
         // Retrieve the headers from the HTML document
         utterance.text += "Going to the Pista House Menu";
         synth.speak(utterance);
-        navigate("/Restaurants/PistaHouse");
+        navigate("/Restaurants/PistaHous");
 
 
       }
@@ -113,7 +113,7 @@ const Home = () => {
         const utterance = new SpeechSynthesisUtterance();
   
         // Retrieve the headers from the HTML document
-        const headers = document.querySelectorAll("h4", "h6");
+        const headers = document.querySelectorAll("h6");
         utterance.text += "The restaurants nearer to you are.";
         headers.forEach((header) => {
           utterance.text += header.textContent + ". ";
@@ -141,9 +141,9 @@ const Home = () => {
                 <div className="card"  >
                   <img src={item.image} className="card-img-top" alt="..." />
                   <div className="card-body">
-                    <h4 className="card-title">{item.name}</h4>
+                    <h6 className="card-title">{item.name}</h6>
                     <h6 className="card-text">{item.description}</h6>
-                    <p className="rating">{item.rating}</p>
+                    <h6 className="rating">Rating {item.rating}</h6>
                   </div>
                 </div>
               </div>

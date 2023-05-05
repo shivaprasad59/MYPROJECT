@@ -8,14 +8,38 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 const Navbar = () => {
   const [read, setRead] = useState(true);
   const [test, setTest] = useState("");
   const [listening, setListening] = useState(false);
   const [goto, setGoto] = useState(false);
+   const [details,setDetails]=useState([]);
 
   const navigate = useNavigate();
+  useEffect(()=>{
+    const fetchData=async()=>{
+      try{
+        const response=await axios.get("http://localhost:5000/login_user");
+        console.log(response.data);
+        setDetails(response.data);
+      }
+      catch(e){
+        console.log(e);
+      }
 
+    }
+    fetchData();
+  },[])
+  useEffect(()=>{
+    if(details.length<1){
+      const synth=window.speechSynthesis;
+      const utterance=new SpeechSynthesisUtterance();
+      // utterance.text+="You haven't logged in.Please login first";
+      synth.speak(utterance);
+      navigate("/Account/Home")
+    }
+  },[details])
   useEffect(() => {
     if (listening) {
       const recognition = new window.webkitSpeechRecognition();
@@ -86,7 +110,7 @@ const Navbar = () => {
         <div>
           <nav className="navbar navbar-expand-lg bg-body-tertiary mt-2">
             <div className="container-fluid">
-              <Link className="navbar-brand" to="#"><img src={logo} className="logo"/><h4 className="logo-name">FOOD DELIVERY</h4></Link>
+              <Link className="navbar-brand" to="#"><img src={logo} className="logo"/><h5 className="logo-name">FOOD DELIVERY</h5></Link>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li className="nav-item">

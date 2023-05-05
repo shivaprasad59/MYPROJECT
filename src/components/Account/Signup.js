@@ -22,7 +22,7 @@ const Signup = () => {
         const transcript = event.results[0][0].transcript.toLowerCase();
         setTest(transcript);
         recognition.stop();
-        console.log(id);
+        console.log(transcript);
       };
       recognition.start();
     };
@@ -88,7 +88,10 @@ const Signup = () => {
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.toLowerCase();
         setId(transcript);
-        recognition.stop();
+        setTimeout(() => {
+          recognition.stop();
+        }, 4000);
+        console.log(transcript);
         console.log(id);
       };
       recognition.start();
@@ -100,7 +103,7 @@ const Signup = () => {
         const transcript = event.results[0][0].transcript.toLowerCase();
         setPassword(transcript);
         recognition.stop();
-        console.log(password);
+        console.log(transcript);
       };
       recognition.start();
         };
@@ -111,7 +114,7 @@ const Signup = () => {
           const transcript = event.results[0][0].transcript.toLowerCase();
           setAddress(transcript);
           recognition.stop();
-          console.log(password);
+          console.log(transcript);
         };
         recognition.start();
           };
@@ -122,7 +125,7 @@ const Signup = () => {
             const transcript = event.results[0][0].transcript.toLowerCase();
             setMobile(transcript);
             recognition.stop();
-            console.log(mobile);
+            console.log(transcript);
           };
           recognition.start();
             };
@@ -171,7 +174,7 @@ const Signup = () => {
       });
        utterance.text+="Added details successfully";
       synth.speak(utterance);
-      
+       navigate("/Account/Login");
         setId("");
         setPassword("");
       }

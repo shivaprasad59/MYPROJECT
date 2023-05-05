@@ -1,5 +1,5 @@
 {
-  "Hyderabaspicedata": [
+  "Hyderabadspicedata": [
     {
       "Id": 1,
       "Item_name": "Chicken Biryani Single",
@@ -30,27 +30,16 @@
     }
   ],
   "cart": [
-    {
-      "id": 0
-    },
-    {
-      "id": 6
-    }
+   
+   
   ],
   "Users": [
     {
       "id": 1,
-      "username": "shiva prasad",
+      "username": "shiva prasad.",
       "address": "pragathi nagar,Hyderabad",
       "mobile": "8977648610",
       "password": "1234"
-    },
-    {
-      "id": 3,
-      "username": "prasad.",
-      "address": "hyderabad.",
-      "mobile": "what does?",
-      "password": "986712"
     }
   ],
   "login_user": [
