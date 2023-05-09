@@ -68,6 +68,9 @@ const Login = () => {
       const recognition = new window.webkitSpeechRecognition();
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.toLowerCase();
+        if(transcript==="go to login."){
+          navigate("/Account/Login")
+        }
         setId(transcript);
         recognition.stop();
         console.log(id);
@@ -92,27 +95,27 @@ const Login = () => {
   }, [listening, click]);
   const [currentUser,setCurrentUser]=useState([]);
   const [uyd,setUyd]=useState(false);
-  useEffect(()=>{
-    if(uyd){
-      const postData=async()=>{
-        try{
-          console.log(currentUser);
-          const response=await axios.post("http://localhost:5000/login_user",{
-            id:currentUser.id,
-            username:currentUser.username,
-            password:currentUser.password,
-            address:currentUser.address,
-            mobile:currentUser.mobile
-          });
-       console.log(response);
-        }
-        catch(e){
-        console.log(e);
-        }
-      }
-      postData();
-    }
-  },[uyd])
+  // useEffect(()=>{
+  //   if(uyd){
+  //     const postData=async()=>{
+  //       try{
+  //         console.log(currentUser);
+  //         const response=await axios.post("http://localhost:5000/login_user",{
+  //           id:currentUser.id,
+  //           username:currentUser.username,
+  //           password:currentUser.password,
+  //           address:currentUser.address,
+  //           mobile:currentUser.mobile
+  //         });
+  //      console.log(response);
+  //       }
+  //       catch(e){
+  //       console.log(e);
+  //       }
+  //     }
+  //     postData();
+  //   }
+  // },[uyd])
   //  useEffect(()=>{
   //   if(goto){
   //     useNavigate('/Account/Home');
@@ -130,11 +133,30 @@ const Login = () => {
           if ((i.username === data.userid) && (i.pass===data.password)) {
 
             console.log("correct details");
+            console.log(i);
             const synth=window.speechSynthesis;
             const utterance=new SpeechSynthesisUtterance();
             utterance.text+="Account found.Please wait,while We are signing you in.";
-            setCurrentUser(data);
-            setUyd(true);
+            // setCurrentUser(data);
+            const payload={
+                  id:i.id,
+                  username:i.username,
+                  password:i.password,
+                  address:i.address,
+                  mobile:i.mobile
+            }
+            const postData=async()=>{
+              try{
+                console.log(payload);
+                const response=await axios.post("http://localhost:5000/login_user",payload);
+             console.log(response);
+              }
+              catch(e){
+              console.log(e);
+              }
+            }
+            postData();
+            // setUyd(true);
             synth.speak(utterance);
             temp = 1;
             // setDetails([...details, data]);
@@ -156,7 +178,7 @@ const Login = () => {
       headers.forEach((header) => {
         utterance.text += header.textContent + " ";
       });
-       utterance.text+="Details are not matched.If not signed up.Yet. First signup please";
+       utterance.text+="Details are not matched,If not signed up,Yet, First signup please";
       synth.speak(utterance);
       navigate("/Account/Signup");
         }

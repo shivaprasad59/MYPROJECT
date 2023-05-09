@@ -10,7 +10,7 @@ import { faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 const Navbar = () => {
-  const [read, setRead] = useState(true);
+  const [read, setRead] = useState(false);
   const [test, setTest] = useState("");
   const [listening, setListening] = useState(false);
   const [goto, setGoto] = useState(false);
@@ -39,7 +39,10 @@ const Navbar = () => {
       synth.speak(utterance);
       navigate("/Account/Home")
     }
-  },[details])
+    else{
+      setRead(true);
+    }
+  },[])
   useEffect(() => {
     if (listening) {
       const recognition = new window.webkitSpeechRecognition();
@@ -82,22 +85,22 @@ const Navbar = () => {
     }
   }, [goto, test, navigate]);
 
-  const handleReading = () => {
-    if (read) {
-      const synth = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance();
+ useEffect(()=>{
+  if (read) {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance();
 
-      // Retrieve the headers from the HTML document
-      const headers = document.querySelectorAll("li");
-      utterance.text+="Hello welcome to our website.This page has the following components.";
-      headers.forEach((header) => {
-        utterance.text += header.textContent + ".";
-      });
+    // Retrieve the headers from the HTML document
+    const headers = document.querySelectorAll("li");
+    utterance.text+="Hello welcome to our website.This page has the following components.";
+    headers.forEach((header) => {
+      utterance.text += header.textContent + ".";
+    });
 
-      synth.speak(utterance);
-      setRead(false);
-    }
-  };
+    synth.speak(utterance);
+    setRead(false);
+  }
+ },[read])
 
   const handleListening = () => {
     setListening(true);
@@ -105,7 +108,7 @@ const Navbar = () => {
   };
 
   return (
-    <button onMouseOver={handleReading} onClick={handleListening} className='main-button'>
+    <button  onClick={handleListening}  className='main-button'>
       <>
         <div>
           <nav className="navbar navbar-expand-lg bg-body-tertiary mt-2">

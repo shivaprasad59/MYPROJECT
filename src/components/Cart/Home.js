@@ -38,14 +38,14 @@ useEffect(()=>{
       const synt=window.speechSynthesis;
       console.log(address);
       const utterance=new SpeechSynthesisUtterance();
-      utterance.text+=("Thank you "+username+"for ordering,")
+      utterance.text+=("Thank you "+username+",for ordering,")
       utterance.text+="Order placed successfully,";
       utterance.text+=("We are delivering to the address,"+address);
       utterance.text+=(",Our delivery partner will make a call to "+mobile)
-      utterance.text+=("Please pay the amount,"+totalprice+",to our delivery partner,");
+      utterance.text+=(",Please pay the amount,"+totalprice+",to our delivery partner,");
       utterance.text+=",Have a nice day.";
       synt.speak(utterance);
-      // setGoto(true);
+      setGoto(true);
     }
   },[test])
   useEffect(()=>{
@@ -111,7 +111,7 @@ useEffect(()=>{
   //   }
   // }, [data, cartdata, rdata]);
 useEffect(()=>{
-   if(rdata.length!==0){
+   if(rdata.length!==0 && totalprice!==0){
     const synt=window.speechSynthesis;
     const utterance=new SpeechSynthesisUtterance();
     utterance.text+="Welcome to the cart page.The items in the cart are,"
@@ -121,7 +121,7 @@ useEffect(()=>{
     });
     synt.speak(utterance);
    }
-},[rdata])
+},[rdata,totalprice])
   return (
     <>
    <button onClick={handleClick}>

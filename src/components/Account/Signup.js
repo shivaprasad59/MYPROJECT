@@ -88,9 +88,12 @@ const Signup = () => {
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.toLowerCase();
         setId(transcript);
-        setTimeout(() => {
-          recognition.stop();
-        }, 4000);
+        // setTimeout(() => {
+        //   recognition.stop();
+        // }, 4000);
+        if(transcript==="go to login."){
+          navigate("/Account/Login")
+        }
         console.log(transcript);
         console.log(id);
       };
@@ -174,7 +177,7 @@ const Signup = () => {
       });
        utterance.text+="Added details successfully";
       synth.speak(utterance);
-       navigate("/Account/Login");
+       
         setId("");
         setPassword("");
       }
@@ -194,6 +197,7 @@ const Signup = () => {
       }
       console.log(payload);
       const res = await axios.post(" http://localhost:5000/Users", payload);
+      navigate("/Account/Login");
       console.log(res);
      
     } catch (e) {

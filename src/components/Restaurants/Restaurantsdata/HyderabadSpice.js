@@ -66,6 +66,10 @@ useEffect(()=>{
        setId(4);
      }
      if(test==="submit."){
+      const synth=window.speechSynthesis;
+      const utterance=new SpeechSynthesisUtterance();
+      utterance.text+="items added to the cart successfully";
+      synth.speak(utterance);
       setSubmit(true);
      }
      if(test==="go to cart."){
