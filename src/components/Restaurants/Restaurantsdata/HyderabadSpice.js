@@ -61,6 +61,9 @@ useEffect(()=>{
       utterance.text+="Added chicken biryani full."
        setId(3);
      }
+     else if(test==="gotohelp." || test==="help." || test==="need help."){
+      navigate("/Help")
+     }
      if(test==="add mutton biryani full."){
       utterance.text+="Added mutton biryani full."
        setId(4);

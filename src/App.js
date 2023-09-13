@@ -13,16 +13,26 @@ import PistaHouse from "./components/Restaurants/Restaurantsdata/PistaHouse";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Home1 from './components/Home'
 import End from "./components/Cart/End";
-
+import Account1 from './components/Account/Home1'
+import Update from "./components/Account/update";
+import Help from "./components/Help/Help";
+import Admin from "./Admin/Admin";
+import UsersList from "./Admin/Users/UsersList";
+import AddRestaurants from "./Admin/AddRestaurants/AddRestaurants";
 function App() {
   return(
     <>
      <div className="main-body">
-      <Navbar/>
+      {/* <Navbar/> */}
       <Routes>
-        <Route path="/" element={<Home1/>} />
+        <Route path="/Home1" element={<Home1/>} />
+        <Route path="/Admin/AddRestaurants" element={<AddRestaurants/>}/>
+        <Route path="/Admin" element={<Admin/>}/>
+        <Route path="/Admin/UsersList" element={<UsersList/>}/>
         <Route path="/Restaurants/Home" element={<Home/>}/>
         <Route path="/Account/Home" element={<Account/>}/>
+        <Route path="/Account/Home1" element={<Account1/>}/>
+        <Route path="/Account/update" element={<Update/>}/>
         <Route path="/Cart/Home" element={<Cart/>}/>
         <Route path="/Account/Login" element={<Login/>}/>
         <Route path="/Account/Signup" element={<Signup/>}/>
@@ -31,6 +41,7 @@ function App() {
         <Route path="/Restaurants/PistaHouse" element={<PistaHouse/>}/>
         <Route path="/Restaurants/Dominos" element={<ChefsAvenue/>}/>
         <Route path="/Cart/End" element={<End/>}/>
+        <Route path="/Help" element={<Help/>}/>
       </Routes>
      </div>
     </>

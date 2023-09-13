@@ -1,0 +1,28 @@
+table,td,tr,th{
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: white;
+}
+.th1{
+    width: 100px;
+}
+.th2{
+ width: 300px;
+}
+.th3{
+    width: 300px;
+}
+.th4{
+    width: 300px;
+}
+.body4{
+    margin-top: 50px;
+    margin-left: 30px;
+    background-color: white;
+}
+.th5{
+    width: 300px;
+}
+h1{
+    margin-bottom: 30px;
+}

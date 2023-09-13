@@ -57,6 +57,9 @@ useEffect(()=>{
       utterance.text+="Added non veg supreme."
        setId(6);
      }
+     else if(test==="gotohelp." || test==="help." || test==="need help."){
+      navigate("/Help")
+     }
      if(test==="add pepper bbq chicken."){
       utterance.text+="Added pepper bbq chicken.."
        setId(7);

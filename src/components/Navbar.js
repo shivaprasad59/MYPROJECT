@@ -40,7 +40,17 @@ const Navbar = () => {
       navigate("/Account/Home")
     }
     else{
-      setRead(true);
+      const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance();
+
+    // Retrieve the headers from the HTML document
+    const headers = document.querySelectorAll("li");
+    utterance.text+="Hello welcome to our website.This page has the following components.";
+    headers.forEach((header) => {
+      utterance.text += header.textContent + ".";
+    });
+
+    synth.speak(utterance);
     }
   },[])
   useEffect(() => {
@@ -69,10 +79,13 @@ const Navbar = () => {
          if(temp==="gotohome"){
             navigate("/");
          }
+         else if(temp==="gotohelp." || temp==="help." || temp==="need help."){
+          navigate("/Help")
+         }
           else if (temp === "gotorestaurants.") {
             navigate("/Restaurants/Home");
           } else if (temp === "gotoaccount.") {
-            navigate("/Account/Home");
+            navigate("/Account/Home1");
           } else if (temp === "gotobag.") {
             navigate("/Cart/Home");
           } else if (temp === "gotoinstamart.") {

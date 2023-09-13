@@ -71,6 +71,9 @@ const Login = () => {
         if(transcript==="go to login."){
           navigate("/Account/Login")
         }
+        if(transcript==="gotohelp." || transcript==="help." || transcript==="need help."){
+          navigate("/Help")
+         }
         setId(transcript);
         recognition.stop();
         console.log(id);
@@ -85,6 +88,9 @@ const Login = () => {
         setPassword(transcript);
         recognition.stop();
         console.log(password);
+        if(transcript==="gotohelp." || transcript==="help." || transcript==="need help."){
+          navigate("/Help")
+         }
         setClick(click+1);
       };
       recognition.start();

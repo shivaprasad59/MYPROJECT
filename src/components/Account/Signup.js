@@ -94,6 +94,9 @@ const Signup = () => {
         if(transcript==="go to login."){
           navigate("/Account/Login")
         }
+        else if(transcript==="gotohelp." || transcript==="help." || transcript==="need help."){
+          navigate("/Help")
+         }
         console.log(transcript);
         console.log(id);
       };
@@ -107,6 +110,9 @@ const Signup = () => {
         setPassword(transcript);
         recognition.stop();
         console.log(transcript);
+        if(transcript==="gotohelp." || transcript==="help." || transcript==="need help."){
+          navigate("/Help")
+         }
       };
       recognition.start();
         };
@@ -118,6 +124,9 @@ const Signup = () => {
           setAddress(transcript);
           recognition.stop();
           console.log(transcript);
+          if(transcript==="gotohelp." || transcript==="help." || transcript==="need help."){
+            navigate("/Help")
+           }
         };
         recognition.start();
           };
@@ -129,6 +138,9 @@ const Signup = () => {
             setMobile(transcript);
             recognition.stop();
             console.log(transcript);
+            if(transcript==="gotohelp." || transcript==="help." || transcript==="need help."){
+              navigate("/Help")
+             }
           };
           recognition.start();
             };

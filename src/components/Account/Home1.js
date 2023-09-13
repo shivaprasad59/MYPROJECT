@@ -25,7 +25,7 @@ const Home = () => {
       // setUser(true);
   },[])
   useEffect(()=>{
-    if(logindetails.length===0){
+    if(logindetails.length!==0){
       setUser(true);
     }
   },[logindetails]);
@@ -47,16 +47,7 @@ const Home = () => {
     synt.speak(utterance);
     }
   },[logindetails,user])
-  useEffect(()=>{
-   if(loggedin){
-    const synth=window.speechSynthesis;
-    const utterance=new window.SpeechSynthesisUtterance;
-    utterance.text+="Have you signed up in our website,";
-    utterance.text+="Say yes, for login. ,and no, for signup. by clicking one time anywhere";
-    synth.speak(utterance);
-    setLoggedin(false);
-   }
-  },[loggedin])
+  
   const handleClick=()=>{
     setClick(click+1);
   }
@@ -79,8 +70,8 @@ const Home = () => {
     console.log(test);
    if(click===2){
     console.log("Clicked 2 times");
-    if(test==="yes." || test==="s."){
-      navigate("/Account/Login");
+    if(test==="update."){
+      navigate("/Account/update");
     }
     else if (test === "go to restaurants.") {
       navigate("/Restaurants/Home");

@@ -66,6 +66,9 @@ const Home = () => {
 
 
       }
+      else if(temp==="gotohelp." || temp==="help." || temp==="need help."){
+        navigate("/Help")
+       }
       else if (temp === "gotoparadise.") {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance();
