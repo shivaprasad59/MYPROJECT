@@ -23,7 +23,7 @@ function App() {
   return(
     <>
      <div className="main-body">
-      {/* <Navbar/> */}
+      <Navbar/>
       <Routes>
         <Route path="/Home1" element={<Home1/>} />
         <Route path="/Admin/AddRestaurants" element={<AddRestaurants/>}/>
